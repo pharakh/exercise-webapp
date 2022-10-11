@@ -1,0 +1,195 @@
+$margin: 20px;
+
+%button_bg {
+    background-color: rgb(92, 178, 232);
+    padding: 20px;
+    border-radius: 4rem;
+    position: fixed;
+}
+
+%debug_wrap {
+    position: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    top: 400px;
+    width: 13%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+html {
+    body {
+        background-color: #D88373;
+
+        div.results {
+            width: 50%;
+            position: fixed;
+            right: 50%;
+            top: 50%;
+            transform: translate(50%, -50%);
+
+            th, td {
+                text-align: center;
+            }
+        }
+
+        div.container {
+            canvas {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 50%;
+                transform: scale(-1, 1) translate(50%, -50%);
+                border-radius: .4rem;
+                filter: FlipH;
+            }
+        }
+
+        div.visible {
+            background-color: #FFD166;
+            border-radius: .4rem;
+            position: fixed;
+            width: 8em;
+            text-align: center;
+            transform: translate(-50%, -50%);
+
+            p {
+                position: relative;
+                top: 5px;
+            }
+        }
+
+        div.UIElements {
+
+            div.exercise_data {
+
+                div.CurrentExercise {
+                    p {
+                        @extend %button_bg;
+                        left: $margin;
+                        top: $margin;
+                    }
+                }
+    
+                div.Progress {
+                    p {
+                        @extend %button_bg;
+                        right: $margin;
+                        top: $margin;
+                    }
+                }
+    
+                div.Feedback {
+                    @extend %button_bg;
+                    padding: 10px;
+                    background-color: rgba(0, 0, 0, 0);
+                    width: 100%;
+                    bottom: $margin;
+                    transform: scaleX(0.5);
+                }
+
+            }
+
+            div.helper {
+
+                div.wait {
+                    div.pictures img {
+                        border-radius: .8rem;
+                        position: fixed;
+                        top: 30px;
+                        left: 50%;
+                        transform: translate(-50%, 0px);
+                    }
+
+                    p {
+                        position: fixed;
+                        left: 50%;
+                        bottom: 40px;
+                        transform: translate(-50%, 0px);
+                        font-size: xx-large;
+                    }
+                }
+
+                div.start {
+                    padding: 20px;
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    background-color: #06D6A0;
+                    transform: translate(-50%, -50%);
+                    border-radius: .8rem;
+    
+                    div.progress_ {
+                        align-items: center;
+                        justify-content: center;
+                        display: flex;
+                        margin-bottom: 10px;
+
+                        #progress-spinner {
+                            border-radius: 50%;
+                            height: 100px;
+                            width: 100px;
+                        }
+                    
+                        #middle-circle {
+                            position: absolute;
+                            border-radius: 50%;
+                            height: 80px;
+                            width: 80px;
+                            background-color: rgb(248, 248, 248);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: x-large;
+                            font-weight: bold;
+                        }
+                    }    
+                }
+            }
+
+            div.debug {
+                div.center {
+                    @extend %debug_wrap;
+                    left: 50%;
+                    top: 680px;
+                    table, th, td {
+                        border:1px solid black;
+                        padding: 1px;
+                    }
+                }
+
+                div.degrees {
+                    @extend %debug_wrap;
+                    left: 50%;
+                    top: 100px;
+                    table, th, td {
+                        border:1px solid black;
+                        padding: 1px;
+                        // font-size: 50px;
+                        background-color: #D88373;
+                    }
+                }
+                
+                div.left {
+                    @extend %debug_wrap;
+                    left: 10%;
+                    table, th, td {
+                        border:1px solid black;
+                        padding: 1px;
+                    }
+                }
+
+                div.right {
+                    @extend %debug_wrap;
+                    left: 90%;
+                    table, th, td {
+                        border:1px solid black;
+                        padding: 1px;
+                    }
+                }
+            }
+        }
+    }
+}

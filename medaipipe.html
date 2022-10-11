@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.rtl.min.css" integrity="sha384-OXTEbYDqaX2ZY/BOaZV/yFGChYHtrXH2nyXJ372n2Y8abBhrqacCEe+3qhSHtLjy" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+        <script src="js/camera_utils.js"></script>
+        <script src="js/drawing_utils.js"></script>
+        <script src="js/pose.js"></script>
+
+        <link rel="stylesheet" href="css/styles.css">
+
+        <title>ورزش</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <p style="display: none;"></p>
+            <video class="input_video" style="display: none;"></video>
+            <canvas class="output_canvas" width="1280px" height="720px" style="display: none;"></canvas>
+        </div>
+
+        <div class="visible" style="display: block;">
+            <p>نمی‌تونم ببینمت</p>
+        </div>
+
+        <div class="UIElements">
+            <div class="exercise_data" style="display: none;">
+                <div class="CurrentExercise"><p></p></div>
+                <div class="Progress"><p></p></div>
+                <div class="Feedback"><div class="progress"><div class="progress-bar" style="width: 50%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div></div>
+            </div>
+            <div class="helper" style="display: none;">
+                <div class="start">
+                    <div class="progress_">
+                        <div id="middle-circle">D:</div>
+                        <div id="progress-spinner"></div>    
+                    </div>
+                    <p>برای شروع، دستان خود را برای 10 ثانیه، 45 درجه بالا ببرید...</p>    
+                </div>
+                <div class="wait">
+                    <div class="pictures"></div>
+                    <p></p>
+                </div>
+            </div>
+            <div class="results">
+                <!-- <table class="table table-sark">
+                    <tr class="table-dark"><th>نام ورزش</th><th>امتیاز از صد</th></tr>
+                    <tr class="bg-primary"><td>درازنشست</td><td>50</td></tr>
+                </table> -->
+            </div>
+            <div class="debug" style="display: none;">
+                <div class="left">
+                    <table>
+                        <tr                    >  <th>landmark  </th>    <th class="x">X</th> <th class="y">Y</th> <th class="z">Z</th> <th class="v">Visibility</th></tr>
+                        <tr id="LEFT_EYE_INNER">  <td>EYE_INNER </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="LEFT_EYE">        <td>EYE       </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="LEFT_EYE_OUTER">  <td>EYE_OUTER </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="LEFT_EAR">        <td>EAR       </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="LEFT_RIGHT">      <td>RIGHT     </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="LEFT_SHOULDER">   <td>SHOULDER  </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="LEFT_ELBOW">      <td>ELBOW     </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="LEFT_WRIST">      <td>WRIST     </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="LEFT_PINKY">      <td>PINKY     </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="LEFT_INDEX">      <td>INDEX     </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="LEFT_THUMB">      <td>THUMB     </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="LEFT_HIP">        <td>HIP       </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="LEFT_KNEE">       <td>KNEE      </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="LEFT_ANKLE">      <td>ANKLE     </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="LEFT_HEEL">       <td>HEEL      </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="LEFT_FOOT_INDEX"> <td>FOOT_INDEX</td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                    </table>
+                </div>
+                <div class="right">
+                    <table>
+                        <tr                     >  <th>landmark  </th>    <th class="x">X</th> <th class="y">Y</th> <th class="z">Z</th> <th class="v">Visibility</th></tr>
+                        <tr id="RIGHT_EYE_INNER">  <td>EYE_INNER </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="RIGHT_EYE">        <td>EYE       </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="RIGHT_EYE_OUTER">  <td>EYE_OUTER </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="RIGHT_EAR">        <td>EAR       </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="RIGHT_LEFT">       <td>LEFT      </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="RIGHT_SHOULDER">   <td>SHOULDER  </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="RIGHT_ELBOW">      <td>ELBOW     </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="RIGHT_WRIST">      <td>WRIST     </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="RIGHT_PINKY">      <td>PINKY     </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="RIGHT_INDEX">      <td>INDEX     </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="RIGHT_THUMB">      <td>THUMB     </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="RIGHT_HIP">        <td>HIP       </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="RIGHT_KNEE">       <td>KNEE      </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="RIGHT_ANKLE">      <td>ANKLE     </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="RIGHT_HEEL">       <td>HEEL      </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                        <tr id="RIGHT_FOOT_INDEX"> <td>FOOT_INDEX</td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                    </table>
+                </div>
+                <div class="center">
+                    <table>
+                        <tr          >  <th>landmark  </th>    <th class="x">X</th> <th class="y">Y</th> <th class="z">Z</th> <th class="v">Visibility</th></tr>
+                        <tr id="NOSE">  <td>NOSE      </td>    <td class="x"> </td> <td class="y"> </td> <td class="z"> </td> <td class="v">          </td></tr>
+                    </table>
+                </div>
+                <div class="degrees">
+                    <table>
+                        <tr>  <th>مفصل</th>    <th>محل</th> <th class="a">angle</th> </tr>
+                        <tr id="lagan_chap"><td>لگن</td><td>میان</td><td class="a">     </td></tr>
+                        <tr id="zanoo_chap"><td>زانو</td><td>میان</td><td class="a">     </td></tr>
+                        <tr id="ketf_chap"><td>کتف</td><td>چپ</td><td class="a">     </td></tr>
+                        <tr id="arenj_chap"><td>آرنج</td><td>چپ</td><td class="a">     </td></tr>
+                        <tr id="beyn_pa"><td>بین دو پا</td><td>میان</td><td class="a">     </td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/mp.js"></script>
+    </body>
+</html>
